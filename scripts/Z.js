@@ -360,7 +360,7 @@ Z.WaitDoRun = function(Wait, Do, Run){
 }
 
 Z.UntilRun = function(Until, Run){
-	Z.UntilWorkRun(Until, null, Run);
+	Z.UntilDoRun(Until, null, Run);
 }
 
 Z.UntilDoRun = function(Until, Work, Run){
