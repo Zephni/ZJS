@@ -6,21 +6,16 @@
 		<script type="text/javascript" src="scripts/Z.js"></script>
 
 		<script type="text/javascript">
-			Z.Ready(function(){
-				Counter = Z("<span>").CSS({"color":"blue"}).Every(1000, (T, Self) => {
-					Self.HTML("Counter: "+T);
+			/* EXAMPLE EXPLAINED
+				Then Z("body") is finding the body element in the page
+				.Every is running a function every 1000 ms, also passing T (the number of iterations) and Self (the span Z.Element)
+				Self.HTML is setting the innerHTML for the Z.Element
+			*/
+
+			Z.Ready(() => {
+				Z("body").Every(1000, function(T){
+					this.HTML("Counter: "+T);
 				});
-
-				Z("body").Append(Counter);
-
-				/* ABOVE EXPLAINED
-					Z("<span>") is creating a new span Z.Element
-					.CSS is setting the CSS for that element
-					.Every is running a function every 1000 ms, also passing T (the number of iterations) and Self (the span Z.Element)
-
-					Then Z("body") is finding the body element in the page
-					.Append is appending the Counter Z.Element
-				*/
 			});
 		</script>
 	</head>

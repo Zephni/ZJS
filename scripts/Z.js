@@ -104,6 +104,9 @@ Z = function(selector)
 			{
 				var value = arguments[arg];
 
+				if(isFinite(value))
+					value = ""+value;
+
 				if(value.constructor === Array)
 				{
 					for(var i = 0; i < value.length; i++)
@@ -312,16 +315,23 @@ Z = function(selector)
 		*/
 
 		Wait(wait, func){
-			setTimeout(func(this), wait);
+			setTimeout(func.call(this), wait);
+		}
+
+		Each(func)
+		{
+			Z.Each(this.Elements, (Element) => {
+				func.call(this, Z(Element));
+			});
 		}
 
 		Every(wait, func, I = 0)
 		{
 			var Iteration = I;
-			func(Iteration, this);
+			func.call(this, Iteration);
 			Z.Wait(wait, () => {
 				Iteration++;
-				func(Iteration, this);
+				func.call(this, Iteration);
 				this.Every(wait, func, Iteration);
 			});
 
@@ -330,7 +340,7 @@ Z = function(selector)
 
 		Run(func)
 		{
-			func(this);
+			func.call(this);
 		}
 
 		/*
@@ -348,6 +358,10 @@ Z = function(selector)
 	return new ZElement(selector);
 }
 
+Z.Wait = function(wait, func){
+	setTimeout(func, wait);
+}
+
 Z.Each = function(Items, func){
 	for(var I in Items)
 		func(Items[I], I);
@@ -360,10 +374,6 @@ Z.Every = function(wait, func, I = 0){
 		func(Iteration);
 		Z.Every(wait, func, Iteration);
 	});
-}
-
-Z.Wait = function(wait, func){
-	setTimeout(func, wait);
 }
 
 Z.WaitDo = function(Wait, Do){

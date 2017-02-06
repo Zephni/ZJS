@@ -93,7 +93,7 @@ GetChild will return the nth child belonging to this element
 ```
 ```javascript
 // This would return the <span> Z.Element from above
-Z("#group").GetChid(1);
+Z("#group").GetChild(1);
 ```
 
 Element will return the actual javascript DOM element
