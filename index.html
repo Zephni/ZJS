@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>Z JS Example</title>
+
+		<script type="text/javascript" src="scripts/Z.js"></script>
+
+		<script type="text/javascript">
+			PText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+
+			Z.Ready(function(){
+				// JavaScript style
+				Body = document.querySelector("body");
+
+				Div = document.createElement("div");
+				Div.style.width = "60%";
+				Div.style.margin = "10px auto";
+				Div.style.border = "3px dotted #999999";
+				Div.style.padding = "15px";
+
+				H2 = document.createElement("h2");
+				H2.style.color = "goldenrod";
+				H2.innerHTML = "JavaScript Style";
+
+				P = document.createElement("p");
+				P.innerHTML = PText;
+
+				Div.appendChild(H2);
+				Div.appendChild(P);
+				Body.appendChild(Div);
+				
+				// Z STYLE
+				Z("body").Append(Z("<div>").CSS({"width":"60%", "margin":"10px auto", "border":"3px dotted #999999", "padding":"15px"}).Append(Z("<h2>").HTML("Z Style").CSS("color", "goldenrod"), Z("<p>").HTML(PText)));
+			});
+		</script>
+	</head>
+	<body></body>
+</html>
