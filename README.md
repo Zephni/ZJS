@@ -10,7 +10,15 @@ replace JQuery, however I will continue building ZJS so it has every function I 
 
 **Some of ZJS handy tools**
 
+Check DOM is ready, similar to JQuery's 'JQuery(document).ready(function(){});'
+```javascript
+Z.Ready(function(){
+	// Run JS here
+});
+```
+
 Do something every X and get iterations with I
+
 ```javascript
 Z.Every(50, function(I){
 	// Do something every 50, can use 'I' for number of iterations
