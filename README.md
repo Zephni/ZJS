@@ -27,7 +27,7 @@ Div.appendChild(P);
 Body.appendChild(Div);
 ```
 
-**Example below is using ZJSS (1 line)**
+**Example below is using ZJS (1 line)**
 ```javascript
 Z("body").Append(Z("<div>").CSS({"width":"60%", "margin":"10px auto", "border":"3px dotted #999999", "padding":"15px"}).Append(Z("<h2>").HTML("Z Style").CSS("color", "goldenrod"), Z("<p>").HTML(PText)));
 ```
@@ -73,17 +73,80 @@ Z.UntilDoRun(function(){return X == Y;}, function(){
 });
 ```
 
-You can create a ZJS object with either of the following styles
+**Z.Element usage, note to see all check scripts/Z.js**
+
+Create a ZJS object with either of the following styles
 ```javascript
 Example = Z("<div>");
 Example = Z.Element("div");
 ```
 
-You can select an element, or collection of elements with a standard CSS query selector
+Select an element, or collection of elements with a standard CSS query selector
 ```javascript
 Example = Z("div");
 Example = Z(".someClass");
 Example = Z("input[type='submit']");
 ```
+
+GetNth will return the nth item from the query selector but as it's own Z.Element
+```html
+<p>Paragraph 1</p>
+<p>Paragraph 2</p>
+<p>Paragraph 3</p>
+```
+```javascript
+// This will select the second paragraph returned by the 'p' selector
+Z("p").GetNth(1);
+```
+
+GetChild will return the nth child belonging to this element
+```html
+<div id="group">
+	<h2>Title</h2>
+	<span>Info</span>
+	<p>Paragraph</p>
+</div>
+```
+```javascript
+// This would return the <span> Z.Element from above
+Z("#group").GetChid(1);
+```
+
+Element will return the actual javascript DOM element
+```javascript
+Z("#example").Element().style.color = "blue";
+```
+
+HTML methods (Assume example is a Z.Element)
+```javascript
+// Just set the text
+Example.HTML("Some text");
+
+// Set a Z.Element as a child
+P = Z("<p>").HTML("Some text");
+Example.HTML(P);
+
+// Set multiple elements/text at once
+P = Z("<p>").HTML("Second line");
+Example.HTML("<p>First line</p>", P);
+
+// Append/Prepend has all the functionality of HTML(), but will only append/prepend it to the current html
+Example.Append("Some text");
+Example.Prepend("Some text");
+```
+
+CSS Method
+```javascript
+// Get CSS style
+Color = Example.CSS("color");
+
+// Set CSS style
+Example.CSS("color", "red");
+
+// Append/Change multiple styles by passing object
+Example.CSS({"background":"blue", "color":"white"});
+```
+
+Please check Z.js for more usages.
 
 Once again, remember this is experimental. But if you have any questions/suggestions please contact me on contact@zephni.com
