@@ -85,9 +85,29 @@ Z = function(selector)
 			if(arguments.length == 0)
 				return this.Elements[0].innerHTML;
 
-			this.Elements[0].innerHTML = "";
+			Z.Each(this.Elements, (Element) => {
+				Element.innerHTML = "";
+			});
+
 			for(var arg = 0; arg < arguments.length; ++ arg)
-				this.Append(arguments[arg]);
+			{
+				var value = arguments[arg];
+
+				if(value.constructor === Array)
+				{
+					for(var i = 0; i < value.length; i++)
+						this.HTML(this.HTML(), value[i]);
+				}
+				else
+				{
+					Z.Each(this.Elements, (Element) => {
+						if(typeof(value) != "string")
+							Element.appendChild(value.Elements[0]);
+						else
+							Element.innerHTML = Element.innerHTML + value;
+					});
+				}
+			}
 
 			return this;
 		}
@@ -95,52 +115,18 @@ Z = function(selector)
 		// Appends to inner HTML with any number of parameters of either string or a Z object
 		Append()
 		{
-			for(var arg = 0; arg < arguments.length; ++ arg)
-			{
-				var value = arguments[arg];
-
-				if(value.constructor === Array)
-				{
-					for(var i = 0; i < value.length; i++)
-					{
-						this.Append(value[i]);
-					}
-				}
-				else
-				{
-					if(typeof(value) != "string")
-						this.Elements[0].appendChild(value.Elements[0]);
-					else
-						this.Elements[0].innerHTML = this.Elements[0].innerHTML + value;
-				}
-			}
-
+			var Args = [];
+			Z.Each(arguments, (Arg) => {Args.push(Arg);});
+			this.HTML(this.HTML(), Args);
 			return this;
 		}
 
 		// Prepends to inner HTML with any number of parameters of either string or a Z object
 		Prepend()
 		{
-			for(var arg = 0; arg < arguments.length; ++ arg)
-			{
-				var value = arguments[arg];
-
-				if(value.constructor === Array)
-				{
-					for(var i = 0; i < value.length; i++)
-					{
-						this.Append(value[i]);
-					}
-				}
-				else
-				{
-					if(typeof(value) != "string")
-						this.Elements[0].appendChild(value.Elements[0]);
-					else
-						this.Elements[0].innerHTML = value + this.Elements[0].innerHTML;
-				}
-			}
-
+			var Args = [];
+			Z.Each(arguments, (Arg) => {Args.push(Arg);});
+			this.HTML(Args, this.HTML());
 			return this;
 		}
 

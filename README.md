@@ -41,7 +41,7 @@ Z.WaitDo(1000, (T) => {
 
 UntilRun accepts a conditional function, and runs the second function once it is true
 ```javascript
-Z.UntilRun(function(){return X == Y;}, () => {
+Z.UntilRun(() => {return X == Y;}, () => {
 	// X is now == Y
 });
 ```
@@ -50,7 +50,7 @@ UntilDoRun accepts a conditional function, and runs the second function while it
 ```javascript
 X = 0;
 Y = 10;
-Z.UntilDoRun(function(){return X == Y;}, () => {
+Z.UntilDoRun(() => {return X == Y;}, () => {
 	X++;
 }, function(){
 	// X is now == Y
