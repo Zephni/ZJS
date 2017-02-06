@@ -308,6 +308,32 @@ Z = function(selector)
 		}
 
 		/*
+			Self referencing tools
+		*/
+
+		Wait(wait, func){
+			setTimeout(func(this), wait);
+		}
+
+		Every(wait, func, I = 0)
+		{
+			var Iteration = I;
+			func(Iteration, this);
+			Z.Wait(wait, () => {
+				Iteration++;
+				func(Iteration, this);
+				this.Every(wait, func, Iteration);
+			});
+
+			return this;
+		}
+
+		Run(func)
+		{
+			func(this);
+		}
+
+		/*
 			DESTRUCTIVE
 		*/
 		
@@ -322,22 +348,22 @@ Z = function(selector)
 	return new ZElement(selector);
 }
 
-Z.Each = function(Items, Func){
+Z.Each = function(Items, func){
 	for(var I in Items)
-		Func(Items[I], I);
+		func(Items[I], I);
 }
 
-Z.Every = function(wait, Func, I = 0){
+Z.Every = function(wait, func, I = 0){
 	var Iteration = I;
 	Z.Wait(wait, () => {
 		Iteration++;
-		Func(Iteration);
-		Z.Every(wait, Func, Iteration);
+		func(Iteration);
+		Z.Every(wait, func, Iteration);
 	});
 }
 
-Z.Wait = function(Wait, Func){
-	setTimeout(Func, Wait);
+Z.Wait = function(wait, func){
+	setTimeout(func, wait);
 }
 
 Z.WaitDo = function(Wait, Do){
