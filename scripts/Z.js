@@ -271,7 +271,9 @@ Z = function(selector)
 		// Removes listener of type [type] using function [func]
 		RemoveListener(type, func)
 		{
-			this.Elements[0].removeEventListener(type, func);
+			Z.Each(this.Elements, function(Element){
+				Element.removeEventListener(type, func);
+			});
 		}
 
 		// When nothing passed, simulate click on first element
