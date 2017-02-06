@@ -8,15 +8,15 @@ Z = function(selector)
 	// Main Z object class
 	class ZElement
 	{
-		constructor(selector)
+		constructor(selector, element = null)
 		{
 			this.Selector = selector;
 			this.Elements = [];
-			this._BuildElements();
+			this._BuildElements(element);
 		}
 
 		// Called from constructor, builds list of elements contained by this object.
-		_BuildElements()
+		_BuildElements(element)
 		{
 			this.Elements = [];
 
@@ -33,7 +33,12 @@ Z = function(selector)
 					else
 					{
 						var Items = [];
-						var Query = document.querySelectorAll(this.Selector);
+
+						if(element === null)
+							var Query = document.querySelectorAll(this.Selector);
+						else
+							var Query = element.querySelectorAll(this.Selector);
+						
 						Array.prototype.forEach.call(Query, function(Item){
 							Items.push(Item);
 						});
@@ -73,6 +78,12 @@ Z = function(selector)
 		GetChild(I)
 		{
 			return Z(this.Elements[0].childNodes[I]);
+		}
+
+		// Find within
+		Find(selector)
+		{
+			return Z(selector, this.Element[0]);
 		}
 
 		/*
