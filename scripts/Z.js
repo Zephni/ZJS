@@ -1,5 +1,5 @@
 /*
-	Z JS
+	ZJS
 	Author: Craig Dennis
 */
 
@@ -363,7 +363,7 @@ Z.UntilRun = function(Until, Run){
 	Z.UntilWorkRun(Until, null, Run);
 }
 
-Z.UntilWorkRun = function(Until, Work, Run){
+Z.UntilDoRun = function(Until, Work, Run){
 	var Interval = setInterval(function(){
 		if(!Until())
 		{
