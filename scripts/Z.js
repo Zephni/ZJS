@@ -130,7 +130,7 @@ Z = function(selector)
 			return this;
 		}
 
-		// Returns CSS object if nothing passed (NOT YET IMPLEMENTED). Returns Style value if CSS key passed as string.
+		// Returns Style value if CSS key passed as string.
 		// Appends to CSS object if object [value] passed. Sets individual key/value if [value2] passed.
 		CSS(value, value2 = null)
 		{
@@ -151,10 +151,6 @@ Z = function(selector)
 			else if(typeof(value) == "string")
 			{
 				return this.Elements[0].style[value];
-			}
-			else if(value === undefined)
-			{
-				// Not yet implemented
 			}
 
 			return this;

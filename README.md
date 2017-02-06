@@ -52,7 +52,7 @@ X = 0;
 Y = 10;
 Z.UntilDoRun(() => {return X == Y;}, () => {
 	X++;
-}, function(){
+}, () => {
 	// X is now == Y
 });
 ```
