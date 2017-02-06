@@ -12,7 +12,7 @@ replace JQuery, however I will continue building ZJS so it has every function I 
 
 Do something every X and get iterations with I
 ```javascript
-Z.Wait(50, function(I){
+Z.Every(50, function(I){
 	// Do something every 50, can use 'I' for number of iterations
 });
 ```
