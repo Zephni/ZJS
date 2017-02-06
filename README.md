@@ -12,7 +12,7 @@ replace JQuery, however I will continue building ZJS so it has every function I 
 
 Check DOM is ready, similar to JQuery's 'JQuery(document).ready(function(){});'
 ```javascript
-Z.Ready(function(){
+Z.Ready(() => {
 	// Run JS here
 });
 ```
@@ -20,28 +20,28 @@ Z.Ready(function(){
 Do something every X and get iterations with I
 
 ```javascript
-Z.Every(50, function(I){
+Z.Every(50, () => (I){
 	// Do something every 50, can use 'I' for number of iterations
 });
 ```
 
 Wait and then run a function
 ```javascript
-Z.Wait(1000, function(){
+Z.Wait(1000, () => (){
 	// Do something
 });
 ```
 
 Wait and do something with the timer every frame (Note Z.WaitDoRun accepts another function that will be called after the time is complete)
 ```javascript
-Z.WaitDo(1000, function(T){
+Z.WaitDo(1000, (T) => {
 	// Use T to get current progression
 });
 ```
 
 UntilRun accepts a conditional function, and runs the second function once it is true
 ```javascript
-Z.UntilRun(function(){return X == Y;}, function(){
+Z.UntilRun(function(){return X == Y;}, () => {
 	// X is now == Y
 });
 ```
@@ -50,7 +50,7 @@ UntilDoRun accepts a conditional function, and runs the second function while it
 ```javascript
 X = 0;
 Y = 10;
-Z.UntilDoRun(function(){return X == Y;}, function(){
+Z.UntilDoRun(function(){return X == Y;}, () => {
 	X++;
 }, function(){
 	// X is now == Y

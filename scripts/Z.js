@@ -334,7 +334,7 @@ Z.Each = function(Items, Func){
 
 Z.Every = function(wait, Func, I = 0){
 	var Iteration = I;
-	Z.Wait(wait, function(){
+	Z.Wait(wait, () => {
 		Iteration++;
 		Func(Iteration);
 		Z.Every(wait, Func, Iteration);
@@ -351,11 +351,11 @@ Z.WaitDo = function(Wait, Do){
 
 Z.WaitDoRun = function(Wait, Do, Run){
 	var T = 0;
-	Z.UntilWorkRun(function(){return T >= Wait;}, function(){
+	Z.UntilDoRun(() => {return T >= Wait;}, () => {
 		T++;
 		Do(T);
-	}, function(){
-		if(Run !== undefined) Run();
+	}, () => {
+		if(Run !== undefined && Run !== null) Run();
 	});
 }
 
@@ -364,7 +364,7 @@ Z.UntilRun = function(Until, Run){
 }
 
 Z.UntilDoRun = function(Until, Work, Run){
-	var Interval = setInterval(function(){
+	var Interval = setInterval(() => {
 		if(!Until())
 		{
 			if(Work !== null) Work();
@@ -372,7 +372,7 @@ Z.UntilDoRun = function(Until, Work, Run){
 		else
 		{
 			clearInterval(Interval);
-			if(Run !== null) Run();
+			if(Run !== undefined && Run !== null) Run();
 		}
 	}, 1);
 }
@@ -382,5 +382,5 @@ Z.Element = function(tag){
 }
 
 Z.Ready = function(Func){
-	Z.UntilRun(function(){return document.readyState === "complete";}, Func);
+	Z.UntilRun(() => {return document.readyState === "complete";}, Func);
 }
