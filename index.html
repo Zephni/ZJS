@@ -13,8 +13,8 @@
 			*/
 
 			Z.Ready(() => {
-				Z("body").Every(1000, function(T){
-					this.HTML("Counter: "+T);
+				Z.Every(1000, function(T){
+					Z("body").HTML("Counter: "+T);
 				});
 			});
 		</script>
